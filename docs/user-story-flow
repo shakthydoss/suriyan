@@ -1,0 +1,25 @@
+End to End Flow. Standalone 
+
+Admin buys the software.
+Admin installs the software.
+Admin changes default - user name and password. 
+Admin adds roles other adminstator ( mentor, student).
+Admin adds users and assign roles. 
+
+Teacher logs in and changes his password or update profile. 
+Teacher create new testpaper save as draft.  
+Teacher publish the saved the draft.
+Teacher invites students to take test. 
+
+Teacher logs in. 
+Teacher create new testpaper save as draft.  
+Teacher publish test paper in open testpaper pool which is avaiable for any student for practise.
+
+Student logs in, changes his password or update the profile. 
+Student sees new testpaper avaiable in their home page and takes the test. 
+Student review & submit the test. 
+Student sees result of test taken in the dashboard.
+
+Student search for testpaper of his/her own interest and takes the test. 
+Student review & submit the test. 
+Student sees results of test taken in the dashboard. 
