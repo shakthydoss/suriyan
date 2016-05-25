@@ -1,0 +1,81 @@
+{
+	"tpname": "Test Paper 1",
+	"audit":{
+		"created_by":"1234",
+		"created_on":"01-01-2016",
+		"updated_by":"1234",
+		"updated_on":"01-01-2016",
+
+		},
+	"status":"published",
+	"data": [
+	{
+		"s.no":1,
+		"qtype":"single_choice",
+		"q":"this is question 1",
+		"o":["india", "japan", "usa"],
+		"correct_answer":"india",
+		"score_for_each_correct_ans":1
+	},
+	{
+		"s.no":2,
+		"qtype":"multiple_choice",
+		"q":"this is question 2",
+		"o":["india", "japan", "usa", "russia"],
+		"correct_answer":["russia" "usa"],
+		"score_for_each_correct_ans":1
+	},
+	{
+		"s.no":3,
+		"qtype":"fill_in_blanks",
+		"q":"this question contains blanks like ..... and ....",
+		"correct_answer":{
+			"1":"first blank answer",
+			"2":"second blank answer"
+			},
+		"score_for_each_correct_ans":1
+	},
+	{
+		"s.no":4,
+		"qtype":"true_or_false",
+		"q":"Delhi is capital of India",
+		"correct_answer":"true",
+		"score_for_each_correct_ans":1
+	},
+	{
+		"s.no":5,
+		"qtype":"match",
+		"match":{
+			"left":{
+				"1":"India",
+				"2":"USA",
+				"3":"Pakistan"
+			},
+			"right":{
+				"1":"Hindu",
+				"2":"Chirstian",
+				"3":"Muslium"
+			}
+		},
+		"answer":["1-2", "2-3", "3-1"],
+		"score_for_each_correct_ans":1
+	},
+	{
+		"s.no":6,
+		"qtype":"text",
+		"q":"who is gandhi",
+		"keywords":["1989", "india", "father-of-nation"],
+		"score_for_each_correct_ans":1
+	},
+	{
+		"s.no":7,
+		"qtype":"multiple_choice_img",
+		"is_q_img":"n",
+		"is_q_img":"y",
+		"q":"who is gandhi in the following images",
+		"o":["img1", "img2", "img3", "img4"],
+		"correct_answer":["img2" "img4"],
+		"score_for_each_correct_ans":1
+	}
+	]
+}

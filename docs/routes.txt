@@ -1,0 +1,24 @@
+prefix / version / 
+
+#home
+rest/
+rest/index 
+rest/help										# brings the help document. 
+
+rest/<username>/								# user dashboard
+rest/<username>/tpid/<tpid>/summary				# test paper summary page.
+rest/<username>/tpid/<tpid>/get					# retrives all questions and options to the test paper. 
+rest/<username>/tpid/<tpid>/started				# update, test has been started to server.
+rest/<username>/tpid/<tpid>/review				# review page before submitting.
+rest/<username>/tpid/<tpid>/submit				# submit the test paper.
+rest/username/edit/profile						# edit user profile.
+
+rest/<username>/uploadtp					# uploads the test paper and saves as draft
+rest/<username>/tpid/<tpid>/publish			# publish the test paper.
+rest/<username>/tpid/<tpid>/delete			# maked as inactive.this test paper can not be taken in futher. 
+
+rest/search?all=true&sort=desc&p=1&pp=10 				# brings all result p = page, pp = per page
+rest/search?q=math&year=2013&sort=desc&p=1&pp=10 		# brings result for query & filter
+
+rest/user/add								# add new user to system
+rest/user/role								# assign  role to new user. 

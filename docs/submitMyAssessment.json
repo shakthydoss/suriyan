@@ -1,0 +1,23 @@
+{
+	"user_id": "sdasd",
+	"my_assessments": [{
+		"test_paper_id": "tp-12345",
+		"score": 23,
+		"total": 25,
+		"my_answers": {
+			"Question1": "answer1",
+			"Question2": [2, 34]
+		},
+		"date_and_time": "date"
+	}, {
+		"test_paper_id": "tp-12346",
+		"score": 23,
+		"total": 25,
+		"my_answers": {
+			"Question1": "answer1",
+			"Question2": [2, 34]
+		},
+		"date_and_time": "date"
+	}]
+
+}
