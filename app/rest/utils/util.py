@@ -1,3 +1,5 @@
+from flask import jsonify
+
 import random
 import string
 import time 
@@ -11,6 +13,9 @@ def get_key():
 	current_time = str(int(round(time.time(),0)))
 	key = key + current_time
 	return key
+
+def to_json(status_code, status_message, data):
+	return jsonify({'status' : status_code, 'message': status_message, 'data': data }), status_code
 
 if __name__ == '__main__':
 	get_key()

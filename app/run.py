@@ -17,7 +17,7 @@ app.register_blueprint(search_controller.blueprint, url_prefix='/rest')
 app.register_blueprint(user_controller.blueprint, url_prefix='/rest')
 app.register_blueprint(test_paper_controller.blueprint, url_prefix='/rest')
 app.register_blueprint(auth_controller.blueprint, url_prefix='/rest')
-#app.register_blueprint(error_handler.blueprint, url_prefix='/rest')
+app.register_blueprint(error_handler.blueprint, url_prefix='/rest')
 
 
 if __name__ == '__main__':
