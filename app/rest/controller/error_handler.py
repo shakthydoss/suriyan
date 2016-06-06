@@ -1,4 +1,3 @@
-
 from flask import Flask, Blueprint, jsonify, request, current_app
 import rest.utils.http_status_codes as status_code
 
@@ -16,6 +15,6 @@ def internal_server_error(error):
     return jsonify({'message': '500'}), 500
 
 @blueprint.app_errorhandler(Exception)
-def unhandled_exception(e):
-    current_app.logger.error('Unhandled Exception: %s', (e))
+def unhandled_exception(error):
+    current_app.logger.error('Unhandled Exception: %s', (error))
     return jsonify({'message': '500'}), 500

@@ -2,7 +2,7 @@ import MySQLdb
 import time
 
 def get_connection():
-	db = MySQLdb.connect("localhost", "root", "admin", "suriyan")
+	db = MySQLdb.connect("localhost", "developer", "developer", "suriyan")
 	return db
 
 def close_db(db):
