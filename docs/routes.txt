@@ -20,5 +20,9 @@ rest/<username>/tpid/<tpid>/delete			# maked as inactive.this test paper can not
 rest/search?all=true&sort=desc&p=1&pp=10 				# brings all result p = page, pp = per page
 rest/search?q=math&year=2013&sort=desc&p=1&pp=10 		# brings result for query & filter
 
-rest/user/add								# add new user to system
-rest/user/role								# assign  role to new user. 
+rest/user/add								# POST add new user to system
+rest/user/edit								# PUT  edit existing user.
+rest/user/1									# GET user id with 1 
+rest/user/									# GET all user. 
+
+rest/user/role								# POST assign role to new user. 
