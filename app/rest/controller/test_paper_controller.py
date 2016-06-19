@@ -4,11 +4,8 @@ import rest.utils.util as util
 import rest.validator.test_paper_validator as validator
 import rest.dao.test_paper_dao as test_paper_dao
 
-
-
 #blueprint object for home controller
 blueprint = Blueprint('test_paper_controller', __name__)
-
 
 # method to publish the test paper. 
 @blueprint.route('/tp/', methods=['GET'])
@@ -17,8 +14,13 @@ def get_tps():
 
 # method to publish the test paper. 
 @blueprint.route('/tp/tpid/<tpid>/', methods=['GET'])
-def get_tp_by_Id(tpid):
-	return jsonify({'message': 'uploadtp'})
+def get_tp_by_id(tpid):
+	current_app.logger.debug("Entering method get_tp_by_id of test_paper_controller.")
+	return_data = test_paper_dao.get_tp_by_id(tpid)
+	status_code = http_status_codes.SUCCESSFULLY_CREATED
+	status_message = "success"
+	current_app.logger.debug("Exit method get_tp_by_id of test_paper_controller.")
+	return util.to_json(status_code, status_message, return_data)
 
 # uploads the test paper and saves as draft
 @blueprint.route('/tp/', methods=['POST'])

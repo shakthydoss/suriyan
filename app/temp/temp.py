@@ -14,3 +14,21 @@ def get_key():
 
 if __name__ == '__main__':
 	get_key()
+
+
+@blueprint.route('/<user_id>/tpid/<tpid>/submit', methods=['GET'])
+def submit(user_id, tpid):
+	tp = test_paper_dao.get_tp_by_id(tpid)
+	tp_urs = user_dao.get_responce(user_id, tpid)
+	questions = tp['data']
+	for question in questions:
+		sno = question['sno']
+		if tp_urs[str(sno)]:
+			mark_obtained = evaluate_responce(question, tp_urs[str(sno)])
+			data = tp_urs[str(sno)]
+			data['mark_obtained'] = mark_obtained
+			user_dao.update_responce(user_id,tpid,data)
+		else:
+			data = { 'question_no' : str(sno), 'not_attempted':'y', 'mark_obtained': 0 }
+			user_dao.update_responce(user_id,tpid,data)
+	return jsonify({'message':'submit'})

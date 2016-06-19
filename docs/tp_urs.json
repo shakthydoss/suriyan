@@ -11,23 +11,41 @@
 
 
 {
-	"tpid":"1234",
-	"user_id":"1234"
-	"date":"01-01-2016",
-	"started":"y",
-	"completed":"y",
-	"score":4,
-	"total-marks":5,
-	"my_answers":[
-		{
-			"question_no":1,
-			"answers":"india",
-			"mark": 1
+	"tpid": "1234",
+	"user_id": "1234",
+	"date": "01-01-2016",
+	"started": "y",
+	"completed": "y",
+	"total_mark_obtained": 4,
+	"1": {
+		"question_no": 1,
+		"answered": "india",
+		"mark_obtained": 1
+	},
+	"2": {
+		"question_no": 2,
+		"answered": ["usa", "india"],
+		"mark_obtained": 1
+	},
+	"3": {
+		"question_no": 3,
+		"answered": {
+			"1": "first blank answer",
+			"2": "second blank answer"
 		},
-		{
-			"question_no":2,
-			"answers":["india","usa"],
-			"mark": 1				
-		}
-	]
+		"mark_obtained": 1
+
+	},
+	"4": {
+		"question_no": 4,
+		"answered": "true",
+		"mark_obtained": 1
+
+	},
+	"5": {
+		"question_no": 5,
+		"answered": ["1-2", "2-3", "3-1"],
+		"mark_obtained": 1
+
+	}
 }

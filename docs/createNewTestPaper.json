@@ -12,34 +12,42 @@
 	"data": [{
 		"sno": 1,
 		"type": "single_choice",
-		"ques": "this is question 1",
-		"option": ["india", "japan", "usa"],
+		"question": "this is question 1",
+		"options": ["india", "japan", "usa"],
 		"answer": "india",
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}, {
 		"sno": 2,
 		"type": "multiple_choice",
-		"ques": "this is question 2",
-		"option": ["india", "japan", "usa", "russia"],
+		"question": "this is question 2",
+		"options": ["india", "japan", "usa", "russia"],
 		"answer": ["russia",
 			"usa"
 		],
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}, {
 		"sno": 3,
 		"type": "fill_in_blanks",
-		"ques": "this question contains blanks like ..... and ....",
+		"question": "this question contains blanks like ..... and ....",
 		"answer": {
 			"1": "first blank answer",
 			"2": "second blank answer"
 		},
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}, {
 		"sno": 4,
 		"type": "true_or_false",
-		"ques": "Delhi is capital of India",
+		"question": "Delhi is capital of India",
 		"answer": "true",
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}, {
 		"sno": 5,
 		"type": "match",
@@ -56,23 +64,29 @@
 			}
 		},
 		"answer": ["1-2", "2-3", "3-1"],
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}, {
 		"sno": 6,
 		"type": "text",
-		"ques": "who is gandhi",
+		"question": "who is gandhi",
 		"keyword": ["1989", "india", "father-of-nation"],
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}, {
 		"sno": 7,
 		"type": "multiple_choice_img",
 		"is_q_img": "n",
 		"is_q_img": "y",
-		"ques": "who is gandhi in the following images",
+		"question": "who is gandhi in the following images",
 		"option": ["img1", "img2", "img3", "img4"],
 		"answer": ["img2",
 			"img4"
 		],
-		"score_for_each_correct_ans": 1
+		"mark_per_correct_answer": 1,
+		"mark_per_wrong_answer":0,
+		"total_mark_for_this_question":1
 	}]
 }

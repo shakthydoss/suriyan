@@ -52,10 +52,10 @@ def validate_question(ques):
 def case_single_choice(ques):
 	error = None
 	is_valid = True
-	if not ('option' in ques):
+	if not ('options' in ques):
 		error = "Invalid option - single question question"
 		is_valid = False
-	if ('option' in ques):
+	if ('options' in ques):
 		if not (len(ques['option']) > 1):
 			error = "Invalid option - single question question"
 			is_valid = False
@@ -71,10 +71,10 @@ def case_single_choice(ques):
 def case_multiple_choice(ques):
 	error = None
 	is_valid = True
-	if not ('option' in ques):
+	if not ('options' in ques):
 		error = "Invalid option - multiple choice question"
 		is_valid = False
-	if ('option' in ques):
+	if ('options' in ques):
 		if not (len(ques['option']) > 1):
 			error = "Invalid option - multiple choice question"
 			is_valid = False
