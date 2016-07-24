@@ -11,6 +11,20 @@ def post_tp(data):
 	if not ('name' in data):
 		error = "Invalid name"
 		is_valid = False
+	if not ('status' in data):
+		error = "Invalid status"
+		is_valid = False
+	if ('status' in data):
+		if (data['status'] == 'draft'):
+			error = "Invalid status"
+			is_valid = False
+	if not ('is_active' in data):
+		error = "Invalid field is_active"
+		is_valid = False
+	if ('is_active' in data):
+		if (data['is_active'] == 'y'):
+			error = "Invalid is_active"
+			is_valid = False
 	if not ('data' in data):
 		error = "Invalid data"
 		is_valid = False

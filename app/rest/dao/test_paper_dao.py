@@ -44,6 +44,20 @@ def publish_tp(tpid):
 	connection_manager.close_connection(connection)
 	current_app.logger.debug("Exit method publish tp of test_paper_dao.")
 
+def deactivate(tpid):
+	current_app.logger.debug("Entering method deactivate tp of test_paper_dao.")
+	db, connection = connection_manager.get_connection()
+	fltr = { '_id': ObjectId(tpid)}
+	data = {
+	"$set": {
+	"is_active": "n"
+	}
+	}
+	result = db.tp.update_one(fltr,data)
+	connection_manager.close_connection(connection)
+	current_app.logger.debug("Exit method deactivate tp of test_paper_dao.")
+
+
 def invite_user_for_test(data):
 	current_app.logger.debug("Entering method publish tp of test_paper_dao.")
 	db, connection = connection_manager.get_connection()

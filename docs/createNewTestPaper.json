@@ -9,6 +9,7 @@
 
 	},
 	"status": "published",
+	"is_active":"y",
 	"data": [{
 		"sno": 1,
 		"type": "single_choice",

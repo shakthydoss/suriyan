@@ -46,7 +46,13 @@ def update_responce(user_id, tpid):
 # method brings data for review page before submitting
 @blueprint.route('/<user_id>/tpid/<tpid>/review', methods=['GET'])
 def review(user_id, tpid):
-	return jsonify({'message':'review'})
+	current_app.logger.debug("Entering method review of user_controller.")
+	return_data = user_dao.review(user_id,tpid)
+	status_code = http_status_codes.SUCCESSFULLY_CREATED
+	status_message = "success"
+	user_dao.started(user_id,tpid)
+	current_app.logger.debug("Exit method review of user_controller.")
+	return util.to_json(status_code, status_message, return_data)
 
 # method submits the test paper for evalution
 @blueprint.route('/<user_id>/tpid/<tpid>/submit', methods=['GET'])

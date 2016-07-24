@@ -40,7 +40,7 @@ def post_tp():
 # method to publish the test paper. 
 @blueprint.route('/tp/tpid/<tpid>/publish', methods=['POST'])
 def publish(tpid):
-	_id = test_paper_dao.publish_tp(tpid)
+	test_paper_dao.publish_tp(tpid)
 	status_code = http_status_codes.SUCCESSFULLY_CREATED
 	status_message = "success"
 	return_data = None
@@ -64,4 +64,12 @@ def invite_user_for_test(tpid, user_id):
 	current_app.logger.debug("Exit method post_tp of test_paper_controller.")
 	return util.to_json(status_code, status_message, return_data)
 
-	
+@blueprint.route('/tp/tpid/<tpid>/deactivate', methods=['POST'])
+def deactivate(tpid):
+	current_app.logger.debug("Extering method deactivate of test_paper_controller.")
+	test_paper_dao.deactivate(tpid)
+	status_code = http_status_codes.SUCCESSFULLY_CREATED
+	status_message = "success"
+	return_data = None
+	current_app.logger.debug("Exit method deactivate of test_paper_controller.")
+	return util.to_json(status_code, status_message, return_data)
