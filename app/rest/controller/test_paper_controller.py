@@ -4,7 +4,7 @@ import rest.utils.util as util
 import rest.validator.test_paper_validator as validator
 import rest.dao.test_paper_dao as test_paper_dao
 
-#blueprint object for home controller
+# blueprint object for home controller
 blueprint = Blueprint('test_paper_controller', __name__)
 
 # method to publish the test paper. 

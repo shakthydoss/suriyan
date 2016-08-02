@@ -5,9 +5,12 @@ import rest.utils.util as util
 #blueprint object for auth conthtroller
 blueprint = Blueprint('auth_controller', __name__)
 
-@blueprint.route('/authenticate/', methods=['GET'])
+@blueprint.route('/authenticate/', methods=['POST'])
 def authenticate():
 	current_app.logger.debug("Entering method authenticate of auth_controller.")
+	print("I am here")
+	data = request.json
+	print(data)
 	#do something here
 	current_app.logger.debug("Exit method authenticate.")
 	return jsonify({'message': 'This is authenticate'}), http_status_codes.SUCCESS
