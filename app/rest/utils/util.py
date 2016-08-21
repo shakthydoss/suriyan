@@ -17,6 +17,10 @@ def get_key():
 def get_current_ts_in_ms():
 	 return str(int(round(time.time() * 1000)))
 
+#used for mysql tables.
+def get_current_ts():
+	return time.strftime('%Y-%m-%d %H:%M:%S')
+
 def to_json(status_code, status_message, data):
 	return jsonify({'status' : status_code, 'message': status_message, 'data': data }), status_code
 

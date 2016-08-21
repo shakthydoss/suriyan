@@ -1,3 +1,6 @@
+stating rest service. 
+
+uwsgi --ini suriyan_uwsgi.ini
 
 
 

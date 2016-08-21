@@ -7,12 +7,12 @@ drop table role;
 
 create table usr(
 uid varchar(20) not null, 
-name varchar(40) not null,
-email varchar(255) not null,
+username varchar(40) not null,
+email varchar(255) null default null,
 is_active char(1) default 'y',
 updated_date timestamp default current_timestamp,
 updated_by varchar(20) not null,
-UNIQUE(email),
+UNIQUE(username),
 primary key (uid)
 );
  
@@ -53,7 +53,7 @@ primary key(tpid)
 );
 
 # Adding default user
-insert into usr(uid,name,email,updated_by) values ("1","admin", "admin@gmail.com", "sys");
+insert into usr(uid,username,email,updated_by) values ("1","admin",null, "sys");
 insert into secret(uid,secret,updated_by) values("1","Reset123", "sys");
 
 # Adding default rule

@@ -3,6 +3,7 @@ import rest.utils.http_status_codes as http_status_codes
 import rest.utils.util as util
 import rest.validator.user_management_validator as validator
 import rest.dao.user_management_dao as user_management_dao
+import rest.dao.auth_dao as auth_dao
 
 
 #blueprint object for home controller
@@ -11,10 +12,16 @@ blueprint = Blueprint('user_management_controller', __name__)
 @blueprint.route('/user/add/', methods=["POST"])
 def add_user():
 	current_app.logger.debug("Entering method add_user of user_management_controller.")
+	if hasattr(request, 'json'):
+		data = request.json
+		is_valid, error = validator.add_user(data)
+		if not (is_valid):
+			return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', error)
+	else:
+		return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', None)
+	if auth_dao.is_logged_in(data['access_token']) == False:
+		return util.to_json(http_status_codes.UNAUTHORIZED, 'Not Authorized', None)
 	data = request.json
-	is_valid, error = validator.add_user(data)
-	if not (is_valid):
-		return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', error)
 	registered = user_management_dao.add_user(data)
 	status_code = None
 	return_data = None
@@ -30,18 +37,25 @@ def add_user():
 	else:
 		status_code = http_status_codes.SUCCESSFULLY_CREATED
 		status_message = "success"
-		data['user_id'] = registered
+		data['uid'] = registered
 		return_data =  data
 	current_app.logger.debug("Exit method add_user of user_management_controller.")
 	return util.to_json(status_code, status_message, return_data)
 
 @blueprint.route('/user/role/', methods=["POST"])
 def add_role():
+	"""Method deletes exiting role and add new roles to the users"""
 	current_app.logger.debug("Entering method add_role of user_management_controller.")
+	if hasattr(request, 'json'):
+		data = request.json
+		is_valid, error = validator.add_role(data)
+		if not (is_valid):
+			return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', error)
+	else:
+		return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', None)
+	if auth_dao.is_logged_in(data['access_token']) == False:
+		return util.to_json(http_status_codes.UNAUTHORIZED, 'Not Authorized', None)
 	data = request.json
-	is_valid = validator.add_role(data)
-	if not (is_valid):
-		return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', error)
 	out = user_management_dao.add_role(data)
 	status_code = None
 	return_data = None

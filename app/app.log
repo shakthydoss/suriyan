@@ -1,0 +1,27 @@
+DEBUG | 2016-08-21 12:28:35,525 | auth_validator.py:5 | authenticate | Entering method authenticate of auth_validator.
+DEBUG | 2016-08-21 12:28:35,527 | auth_validator.py:28 | authenticate | Exit method authenticate of auth_validator.
+DEBUG | 2016-08-21 12:28:35,527 | auth_dao.py:8 | authenticate | Entering method authenticate of auth_dao.
+DEBUG | 2016-08-21 12:28:35,544 | auth_dao.py:20 | authenticate | Exit method authenticate of auth_dao.
+DEBUG | 2016-08-21 12:28:35,545 | auth_controller.py:42 | authenticate | Exit method authenticate.
+DEBUG | 2016-08-21 12:28:52,878 | user_controller.py:45 | change_username | Entering method change_username of user_controller.
+DEBUG | 2016-08-21 12:28:52,878 | user_validator.py:43 | change_username | Entering method change_username of user_validator.
+DEBUG | 2016-08-21 12:28:52,879 | user_validator.py:67 | change_username | Exit method change_username of user_validator.
+DEBUG | 2016-08-21 12:28:52,879 | user_dao.py:27 | change_username | Entering method change_username of user_dao.
+DEBUG | 2016-08-21 12:28:52,886 | user_dao.py:42 | change_username | Exit method change_username of user_dao.
+DEBUG | 2016-08-21 12:28:52,887 | user_controller.py:65 | change_username | Exit method change_username of user_controller.
+DEBUG | 2016-08-21 12:29:27,401 | user_controller.py:45 | change_username | Entering method change_username of user_controller.
+DEBUG | 2016-08-21 12:29:27,402 | user_validator.py:43 | change_username | Entering method change_username of user_validator.
+DEBUG | 2016-08-21 12:29:27,402 | user_validator.py:67 | change_username | Exit method change_username of user_validator.
+DEBUG | 2016-08-21 12:29:27,402 | user_dao.py:27 | change_username | Entering method change_username of user_dao.
+DEBUG | 2016-08-21 12:29:27,410 | user_dao.py:42 | change_username | Exit method change_username of user_dao.
+DEBUG | 2016-08-21 12:29:27,410 | user_controller.py:65 | change_username | Exit method change_username of user_controller.
+DEBUG | 2016-08-21 12:38:27,483 | auth_controller.py:18 | authenticate | Entering method authenticate of auth_controller.
+DEBUG | 2016-08-21 12:38:27,484 | auth_validator.py:5 | authenticate | Entering method authenticate of auth_validator.
+DEBUG | 2016-08-21 12:38:27,484 | auth_validator.py:28 | authenticate | Exit method authenticate of auth_validator.
+DEBUG | 2016-08-21 12:38:27,484 | auth_dao.py:8 | authenticate | Entering method authenticate of auth_dao.
+DEBUG | 2016-08-21 12:38:27,495 | auth_dao.py:20 | authenticate | Exit method authenticate of auth_dao.
+DEBUG | 2016-08-21 12:38:27,496 | auth_controller.py:42 | authenticate | Exit method authenticate.
+DEBUG | 2016-08-21 12:38:43,650 | user_controller.py:73 | get_role_for_user | Entering method get_role_for_user of user_controller.
+DEBUG | 2016-08-21 12:38:43,651 | user_dao.py:46 | get_role_for_user | Entering method get_role_for_user of user_dao
+DEBUG | 2016-08-21 12:38:43,669 | user_dao.py:62 | get_role_for_user | Entering method get_role_for_user of user_dao
+DEBUG | 2016-08-21 12:38:43,669 | user_controller.py:85 | get_role_for_user | Exit method get_role_for_user of user_controller.

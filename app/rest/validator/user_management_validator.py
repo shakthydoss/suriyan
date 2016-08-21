@@ -4,12 +4,27 @@ def add_user(data):
 	current_app.logger.debug("Entering method add_user of user_management_controller_validator.")
 	error = None
 	is_valid = True
-	if not (data):
-		error = "Invalid data"
+	if not 'access_token' in data:
+		error = "Field access_token is missing."
 		is_valid = False
-	if not ('name' in data):
-		error = "Invalid name"
+	if 'access_token' in data:
+		if not data['access_token']:
+			error = "access_token cannot be empty"
+			is_valid = False
+	if not 'username' in data:
+		error = "Field username is missing."
 		is_valid = False
+	if 'username' in data:
+		if not data['username']:
+			error = "username cannot be empty"
+			is_valid = False
+	if not 'password' in data:
+		error = 'Field password id missing'
+		is_valid = False
+	if 'password' in data: 
+		if not data['password']:
+			error = "password cannot be empty"
+			is_valid = False
 	current_app.logger.debug("Exit method add_user of user_management_controller_validator.")
 	return is_valid, error
 
@@ -17,17 +32,26 @@ def add_role(data):
 	current_app.logger.debug("Entering method add_role of user_management_controller_validator.")
 	error = None
 	is_valid = True
-	if not (data):
-		error = "Invalid data"
+	if not 'access_token' in data:
+		error = "Field access_token is missing."
 		is_valid = False
-	if not ('uid' in data):
-		error = "Invalid uid"
+	if 'access_token' in data:
+		if not data['access_token']:
+			error = "access_token cannot be empty"
+			is_valid = False
+	if not 'uid' in data:
+		error = "Field uid is missing"
 		is_valid = False
-	if not ('role_ids' in data):
-		error = "Invalid role ids"
+	if 'uid' in data:
+		if not data['uid']:
+			error = "uid cannot be empty"
+			is_valid = False
+	if not 'role_ids' in data:
+		error = "Field role_ids cannot be empty"
 		is_valid = False
-	if not (isinstance(data['role_ids'], list)):
-		error = "Invalid role ids - should be an array"
-		is_valid = False
+	if 'role_ids' in data:
+		if not (isinstance(data['role_ids'], list)):
+			error = "role_ids should be an array"
+			is_valid = False
 	current_app.logger.debug("Exit method add_role of user_management_controller_validator.")
 	return is_valid, error

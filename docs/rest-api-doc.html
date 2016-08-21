@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reset API DOC</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+<table class="table table-bordered table-hover">
+	<thead>
+	<tr>
+		<th>Sno</th>
+		<th>Type</th>
+		<th>Method</th>
+		<th>Url</th>
+		<th>Url Parameter</th>
+		<th>Input Json</th>
+		<th>Output</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>1</td>
+		<td>Post</td>
+		<td>Authenticate</td>
+		<td>/authenticate/</td>
+		<td>-</td>
+		<td>{"username":"admin","password":"Reset123"}</td>
+		<td>Output</td>
+	</tr>
+		<tr>
+		<td>2</td>
+		<td>Post</td>
+		<td>Change Password</td>
+		<td>/changePassword/</td>
+		<td>-</td>
+		<td>{"uid":"1","repeat":"Reset123","secret":"Reset123","access_token":"1"}</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>3</td>
+		<td>Post</td>
+		<td>Change Username</td>
+		<td>/changeUsername/</td>
+		<td>-</td>
+		<td>{"uid":"1","username":"admin123","access_token":"1"}</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>4</td>
+		<td>Post</td>
+		<td>Add new user</td>
+		<td>/user/add/</td>
+		<td>-</td>
+		<td>{"username":"shakthydoss","password":"Reset123","access_token":"1"}</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>5</td>
+		<td>Post</td>
+		<td>Add/Edit role to user</td>
+		<td>/user/role/</td>
+		<td>-</td>
+		<td>{"uid":"DMQvzbIo1471761028","role_ids":[1],"access_token":"1"}</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>6</td>
+		<td>Post</td>
+		<td>Add/Edit user profile</td>
+		<td>/updateProfile/</td>
+		<td>-</td>
+		<td>{"uid":"1","fullname":"sakthi dasan sekar","email":"shakthydoss@gmail.com","phone":"9884935355","access_token":"1"}</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>7</td>
+		<td>Get</td>
+		<td>Get Roles assigned for user</td>
+		<td>/getRole/uid/{{uid}}</td>
+		<td>DMQvzbIo1471761028</td>
+		<td>-</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>8</td>
+		<td>Post</td>
+		<td>Logout</td>
+		<td>/logout/{{uid}}/</td>
+		<td>DMQvzbIo1471761028</td>
+		<td>-</td>
+		<td>Output</td>
+	</tr>
+	</tr>
+		<tr>
+		<td>Sno</td>
+		<td>Type</td>
+		<td>Method</td>
+		<td>url</td>
+		<td>Url Parameter</td>
+		<td>Input Json</td>
+		<td>Output</td>
+	</tr>
+	</tbody>
+</table>
+
+
+  </body>
+</html>
+
