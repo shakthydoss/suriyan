@@ -40,7 +40,7 @@
 		},
 		"mark_per_correct_answer": 1,
 		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
+		"total_mark_for_this_question":2
 	}, {
 		"sno": 4,
 		"type": "true_or_false",
