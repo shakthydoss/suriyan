@@ -17,7 +17,7 @@ def authenticate():
             return util.to_json(http_status_codes.BAD_REQUEST, error)
     else:
         return util.to_json(http_status_codes.BAD_REQUEST, http_status_codes.MESSAGE_INVALID_INPUTS)
-    # return_value = auth_dao.authenticate(data)
+        # return_value = auth_dao.authenticate(data)
     temp = {}
     temp["access_token"] = "12345678901234567890"
     return util.to_json(http_status_codes.SUCCESS, "return_data")
