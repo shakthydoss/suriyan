@@ -7,6 +7,8 @@ venv/include
 # Igonore python compile files
 *.pyc
 .idea/
+app.log 
+app.log.*
 
 # Mac OS X custom attribute files
 .DS_Store
