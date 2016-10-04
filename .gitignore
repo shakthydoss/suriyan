@@ -6,6 +6,7 @@ venv/include
 
 # Igonore python compile files
 *.pyc
+.idea/
 
 # Mac OS X custom attribute files
 .DS_Store

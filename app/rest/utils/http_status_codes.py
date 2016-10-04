@@ -14,3 +14,5 @@ CONFLICT = 409
 
 # 5xx server side error
 SERVER_ERROR = 500
+
+MESSAGE_INVALID_INPUTS = "Invalid inputs."

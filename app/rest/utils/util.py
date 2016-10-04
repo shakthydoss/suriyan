@@ -21,8 +21,8 @@ def get_current_ts_in_ms():
 def get_current_ts():
 	return time.strftime('%Y-%m-%d %H:%M:%S')
 
-def to_json(status_code, status_message, data):
-	return jsonify({'status' : status_code, 'message': status_message, 'data': data }), status_code
+def to_json(status_code, data):
+	return jsonify({'status' : status_code, 'data': data }), status_code
 
 if __name__ == '__main__':
 	get_key()

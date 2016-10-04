@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, jsonify, request, current_app
 
 def add_user(data):
-	current_app.logger.debug("Entering method add_user of user_management_controller_validator.")
+	current_app.logger.debug("Entering method add_user of user_management_validator.")
 	error = None
 	is_valid = True
 	if not 'access_token' in data:
@@ -9,27 +9,33 @@ def add_user(data):
 		is_valid = False
 	if 'access_token' in data:
 		if not data['access_token']:
-			error = "access_token cannot be empty"
+			error = "access_token cannot be empty."
 			is_valid = False
 	if not 'username' in data:
 		error = "Field username is missing."
 		is_valid = False
 	if 'username' in data:
 		if not data['username']:
-			error = "username cannot be empty"
+			error = "username cannot be empty."
 			is_valid = False
 	if not 'password' in data:
-		error = 'Field password id missing'
+		error = 'Field password id missing.'
 		is_valid = False
 	if 'password' in data: 
 		if not data['password']:
-			error = "password cannot be empty"
+			error = "password cannot be empty."
 			is_valid = False
-	current_app.logger.debug("Exit method add_user of user_management_controller_validator.")
+		if not (data['password'].isalnum()):
+			error = "Password should be alpha numeric. No special symbols allowed."
+			is_valid = False
+		if len(data['password']) >= 6 and len(data['password']) <= 12:
+			error = "Minimum of 6 and Max of 12 charater is required for password."
+			is_valid = False
+	current_app.logger.debug("Exit method add_user of user_management_validator.")
 	return is_valid, error
 
 def add_role(data):
-	current_app.logger.debug("Entering method add_role of user_management_controller_validator.")
+	current_app.logger.debug("Entering method add_role of user_management_validator.")
 	error = None
 	is_valid = True
 	if not 'access_token' in data:
@@ -53,5 +59,5 @@ def add_role(data):
 		if not (isinstance(data['role_ids'], list)):
 			error = "role_ids should be an array"
 			is_valid = False
-	current_app.logger.debug("Exit method add_role of user_management_controller_validator.")
+	current_app.logger.debug("Exit method add_role of user_management_validator.")
 	return is_valid, error

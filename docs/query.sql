@@ -43,6 +43,17 @@ UNIQUE(name),
 primary key(role_id)
 );
 
+create table tag(
+tag_id int AUTO_INCREMENT,
+name varchar(20), 
+description varchar(20) not null, 
+is_active char(1) default 'y',
+updated_date timestamp default current_timestamp,
+updated_by varchar(20) not null,
+UNIQUE(name),
+primary key(tag_id)
+);
+
 create table tp(
 tpid varchar(30),
 name varchar(255),
@@ -63,3 +74,5 @@ insert into role (name,description,updated_by) values ('student','student','syst
 
 # Adding role to default user
 insert into usr_role(uid,role_id,updated_by) values ("1", "1", "sys");
+
+

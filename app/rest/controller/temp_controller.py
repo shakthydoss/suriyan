@@ -25,7 +25,7 @@ def started(user_id, tpid):
 	status_message = "success"
 	return_data = str(_id)
 	temp_dao.started(user_id,tpid)
-	return util.to_json(status_code, status_message, return_data)
+	return util.to_json(status_code, return_data)
 
 @blueprint.route('/<user_id>/tpid/<tpid>/update_responce', methods=['POST'])
 def update_responce(user_id, tpid):
@@ -33,14 +33,14 @@ def update_responce(user_id, tpid):
 	data = request.json
 	is_valid, error = validator.update_responce(user_id,tpid,data)
 	if not (is_valid):
-		return util.to_json(http_status_codes.BAD_REQUEST, error, None)
+		return util.to_json(http_status_codes.BAD_REQUEST, error)
 	temp_dao.update_responce(user_id,tpid,data)
 	status_code = http_status_codes.SUCCESSFULLY_CREATED
 	status_message = "success"
 	return_data = None
 	temp_dao.started(user_id,tpid)
 	current_app.logger.debug("Exit method started of user_controller.")
-	return util.to_json(status_code, status_message, return_data)
+	return util.to_json(status_code, return_data)
 
 
 # method brings data for review page before submitting
@@ -52,7 +52,7 @@ def review(user_id, tpid):
 	status_message = "success"
 	temp_dao.started(user_id,tpid)
 	current_app.logger.debug("Exit method review of user_controller.")
-	return util.to_json(status_code, status_message, return_data)
+	return util.to_json(status_code, return_data)
 
 # method submits the test paper for evalution
 @blueprint.route('/<user_id>/tpid/<tpid>/submit', methods=['GET'])

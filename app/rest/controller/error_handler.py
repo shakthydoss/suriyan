@@ -8,14 +8,14 @@ blueprint = Blueprint('error_handler', __name__)
 @blueprint.app_errorhandler(404)
 def page_not_found(error):
 	current_app.logger.error('resource not found: %s', (request.path))
-	return util.to_json(400,'resource not found', None), 400 
+	return util.to_json(400, None), 400 
 
 @blueprint.app_errorhandler(500)
 def internal_server_error(error):
 	current_app.logger.error('server error: %s', (error))
-	return util.to_json(500,'error', None), 500 
+	return util.to_json(500, None), 500 
 
 @blueprint.app_errorhandler(Exception)
 def unhandled_exception(error):
 	current_app.logger.error('unhandled exception: %s', (error))
-	return util.to_json(500,'error', None), 500
+	return util.to_json(500, None), 500
