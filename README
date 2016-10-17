@@ -1,6 +1,14 @@
 stating rest service. 
-
+---------------------
 uwsgi --ini suriyan_uwsgi.ini
 
+
+Pip getting started
+---------------------
+For installing new packages from requirements file.
+pip install -r requirements.txt
+
+For freeze package of current virtual environment
+pip freeze > requirements.txt
 
 

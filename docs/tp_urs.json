@@ -1,51 +1,29 @@
 {
-	"tpid":"1234",
-	"uid":"1234"
-	"date":"01-01-2016",
-	"started":"n",
-	"completed":n,
-	"score":0,
-	"total-marks":5,
-}
-
-
-
-{
-	"tpid": "1234",
-	"uid": "1234",
-	"date": "01-01-2016",
-	"started": "y",
-	"completed": "y",
-	"total_mark_obtained": 4,
-	"1": {
-		"question_no": 1,
-		"answered": "india",
-		"mark_obtained": 1
-	},
-	"2": {
-		"question_no": 2,
-		"answered": ["usa", "india"],
-		"mark_obtained": 1
-	},
-	"3": {
-		"question_no": 3,
-		"answered": {
-			"1": "first blank answer",
-			"2": "second blank answer"
-		},
-		"mark_obtained": 1
-
-	},
-	"4": {
-		"question_no": 4,
-		"answered": "true",
-		"mark_obtained": 1
-
-	},
-	"5": {
-		"question_no": 5,
-		"answered": ["1-2", "2-3", "3-1"],
-		"mark_obtained": 1
-
-	}
+  "tpid": "1234",
+  "uid": "1234",
+  "date": "01-01-2016",
+  "started": "n",
+  "completed": "n",
+  "score": 0,
+  "total_marks": 5,
+  "no_of_attempts":1,
+  "no_of_attempts_allowed":"1",
+  "data": [{
+    "qid":"1",
+    "answer":"",
+    "mark_obtained":0,
+    "attempted":"n"
+  },
+    {
+    "qid":"2",
+    "answer":"",
+    "mark_obtained":0,
+    "attempted":"y"
+  },{
+    "qid":"3",
+    "answer":"",
+    "mark_obtained":1,
+    "attempted":"y"
+  }
+  ]
 }

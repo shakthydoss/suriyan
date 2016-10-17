@@ -1,20 +1,41 @@
 from flask import current_app
 import rest.dao.mysqldb as connection_manager
+import rest.dao.mongodb as connection_manager_mongo
 import rest.utils.util as util
 import rest.utils.gobal_variable as gobal_variable
 import requests
+import json
 
 
 def authenticate(data):
     current_app.logger.debug("Entering method authenticate of auth_dao.")
-    r = requests.post('http://localhost/auth/authenticateUser/', data=data)
-    print r.status_code
+    headers = {'content-type': 'application/json'}
+    r = requests.post('http://localhost/auth/authenticateUser/', data=json.dumps(data), headers=headers)
+    if json.loads(r.content)["status"] == 200:
+        print json.loads(r.content)["data"]["uid"]
+        db, connection = connection_manager_mongo.get_connection()
+        uid = json.loads(r.content)["data"]["uid"]
+        fltr = {"uid": uid}
+        result = db.usr.find_one(fltr)
+        del result["_id"]
+        result["access_token"] = json.loads(r.content)["data"]["access_token"]
+        tmp = dict()
+        tmp["status"] = "200"
+        tmp["data"] = result
+        tmp = json.dumps(tmp)
+        return tmp
+    return r.content
 
-    return ""
+
+def logout(data):
+    current_app.logger.debug("Entering method logout of auth_dao.")
+    headers = {'content-type': 'application/json'}
+    r = requests.post('http://localhost/auth/logout/', data=json.dumps(data), headers=headers)
+    return r.content
 
 
-def is_logged_in(uid):
-    if uid in gobal_variable.user_logged_in_list:
-        return True
-    else:
-        return False
+def authenticate_token(data):
+    current_app.logger.debug("Entering method logout of auth_dao.")
+    headers = {'content-type': 'application/json'}
+    r = requests.post('http://localhost/auth/authenticateToken/', data=json.dumps(data), headers=headers)
+    return r.content

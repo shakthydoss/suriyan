@@ -13,20 +13,16 @@ blueprint = Blueprint('tag_controller', __name__)
 def get_tags():
     current_app.logger.debug("Entering method get_tags of tag_controller.")
     return_data = tag_dao.get_tags()
-    status_code = 200
-    status_message = "Success"
     current_app.logger.debug("Exit method get_tags of tag_controller.")
-    return util.to_json(status_code, return_data)
+    return util.to_json(http_status_codes.SUCCESS, return_data)
 
 
 @blueprint.route('/tag/id/<tag_id>/', methods=['GET'])
 def get_tag_by_id(tag_id):
     current_app.logger.debug("Entering method get_tag_by_id of tag_controller.")
     return_data = tag_dao.get_tag_by_id(tag_id)
-    status_code = 200
-    status_message = "Success"
     current_app.logger.debug("Exit method get_tag_by_id of tag_controller.")
-    return util.to_json(status_code, return_data)
+    return util.to_json(http_status_codes.SUCCESS, return_data)
 
 
 @blueprint.route('/tag/new/', methods=['POST'])
@@ -35,21 +31,15 @@ def save_tag():
     if hasattr(request, 'json'):
         data = request.json
         is_valid, error = validator.save_tag(data)
-        if not (is_valid):
+        if not is_valid:
             return util.to_json(http_status_codes.BAD_REQUEST, error)
     else:
         return util.to_json(http_status_codes.BAD_REQUEST, None)
-
     return_value = tag_dao.save_tag(data)
-    return_data = None
-    status_code = 200
-    status_message = "Success"
-    if (return_value != 0):
-        return_data = None
-        status_code = 400
-        status_message = "Tag name already exit or could not process you request"
-    current_app.logger.debug("Exit method save_tag of tag_controller.")
-    return util.to_json(status_code, return_data)
+    if return_value != 0:
+        # already exits error.
+        return util.to_json(http_status_codes.CONFLICT, http_status_codes.MESSAGE_CONFLICT)
+    return util.to_json(http_status_codes.SUCCESSFULLY_CREATED, http_status_codes.MESSAGE_SUCCESSFULLY_CREATED)
 
 
 @blueprint.route('/tag/update/', methods=['POST'])
@@ -59,17 +49,13 @@ def update_tag():
         data = request.json
         is_valid, error = validator.update_tag(data)
         if not (is_valid):
-            return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input', error)
+            return util.to_json(http_status_codes.BAD_REQUEST, error)
     else:
-        return util.to_json(http_status_codes.BAD_REQUEST, None)
+        return util.to_json(http_status_codes.BAD_REQUEST, http_status_codes.MESSAGE_SERVER_ERROR)
 
     return_value = tag_dao.update_tag(data)
     return_data = None
-    status_code = 200
-    status_message = "Success"
     if (return_value != 0):
-        return_data = None
-        status_code = 400
-        status_message = "Tag name already exit or could not process you request"
+        return util.to_json(http_status_codes.BAD_REQUEST, http_status_codes.MESSAGE_SERVER_ERROR)
     current_app.logger.debug("Exit method save_tag of tag_controller.")
-    return util.to_json(status_code, return_data)
+    return util.to_json(http_status_codes.SUCCESS, return_data)

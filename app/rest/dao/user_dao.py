@@ -3,52 +3,43 @@ import rest.dao.mongodb as connection_manager_mongo
 import rest.dao.mysqldb as connection_manager_mysql
 import rest.utils.util as util
 from bson.objectid import ObjectId
+import requests
+import json
 
 
 def change_password(data):
     current_app.logger.debug("Entering method change_password of user_dao.")
-    try:
-        db = connection_manager_mysql.get_connection()
-        cursor = db.cursor()
-        sql = "update secret set secret = %s, updated_date = %s, updated_by = %s where uid = %s"
-        current_ts = util.get_current_ts()
-        print(current_ts)
-        data = (data['secret'], current_ts, data['access_token'], data['uid'])
-        cursor.execute(sql, data)
-        db.commit()
-    except Exception, e:
-        current_app.logger.error("Exception : %s", e)
-        return -1
-    finally:
-        connection_manager_mysql.close_db(db)
+    headers = {'content-type': 'application/json'}
+    r = requests.post('http://localhost/auth/updatePassword/', data=json.dumps(data), headers=headers)
     current_app.logger.debug("Exit method change_password of user_dao.")
-    return 1
+    return r.content
 
 
 def change_username(data):
     current_app.logger.debug("Entering method change_username of user_dao.")
-    try:
+    headers = {'content-type': 'application/json'}
+    r = requests.post('http://localhost/auth/updateUsername/', data=json.dumps(data), headers=headers)
+    print r.content
+    return_value = None
+    if r.status_code == 200 or r.status_code == 201:
         db = connection_manager_mysql.get_connection()
         cursor = db.cursor()
-        sql = "update usr set username = %s, updated_date = %s, updated_by = %s where uid = %s"
-        current_ts = util.get_current_ts()
-        print(current_ts)
-        dbdata = (data['new_username'], current_ts, data['access_token'], data['uid'])
-        cursor.execute(sql, dbdata)
-        db.commit()
-    except Exception, e:
-        current_app.logger.error("Exception : %s", e)
-        return -1
-    finally:
-        connection_manager_mysql.close_db(db)
-    # updating username to mongo
-    db, connection = connection_manager_mongo.get_connection()
-    key = {"uid": data['uid']}
-    data = {"username": data['new_username'], "uid": data['uid']}
-    result = db.usr.update(key, data, upsert=True)
-    connection_manager_mongo.close_connection(connection)
+        try:
+            sql = "update usr set username = %s where uid = %s"
+            values = (data["new_username"], data["uid"])
+            cursor.execute(sql, values)
+            db.commit()
+            return_value = 1
+        except Exception, e:
+            current_app.logger.error("Exception : %s", str(e))
+            db.rollback()
+            return_value = -1
+        finally:
+            connection_manager_mysql.close_db(db)
+    else:
+        return_value = -1
     current_app.logger.debug("Exit method change_username of user_dao.")
-    return 1
+    return return_value
 
 
 def get_role_for_user(uid):
@@ -91,3 +82,4 @@ def get_my_profile(uid):
     connection_manager_mongo.close_connection(connection)
     current_app.logger.debug("Exit method get_my_profile of user_dao")
     return result
+

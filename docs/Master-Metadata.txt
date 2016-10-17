@@ -1,0 +1,14 @@
+Test paper - status
+-------------------
+draft
+open
+close
+
+Test paper questions types
+--------------------------
+Single choice
+Multiple choice
+True or false
+Fill in the blanks
+Match the followings
+Free text

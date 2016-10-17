@@ -9,16 +9,6 @@ import rest.dao.test_paper_dao as test_paper_dao
 blueprint = Blueprint('user_controller', __name__)
 
 
-@blueprint.route('/<user_id>/', methods=['GET'])
-def dashboard(user_id):
-    return jsonify({'message': 'This is dashboard'})
-
-
-@blueprint.route('/<user_id>/tpid/<tpid>/summary', methods=['GET'])
-def summary(user_id, tpid):
-    return jsonify({'message': 'test paper summary page'})
-
-
 @blueprint.route('/<user_id>/tpid/<tpid>/started', methods=['POST'])
 def started(user_id, tpid):
     current_app.logger.debug("Entering method started of user_controller.")
@@ -60,7 +50,7 @@ def review(user_id, tpid):
 
 # method submits the test paper for evalution
 @blueprint.route('/<user_id>/tpid/<tpid>/submit', methods=['GET'])
-def submit(user_id, tpid):
+def completed(user_id, tpid):
     current_app.logger.debug("Entering method submit of user_controller.")
     temp_dao.submit(user_id, tpid)
     evaluate_submission(user_id, tpid)

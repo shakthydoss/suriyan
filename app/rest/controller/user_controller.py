@@ -15,7 +15,7 @@ def change_password():
     if hasattr(request, 'json'):
         data = request.json
         is_valid, error = validator.change_password(data)
-        if not (is_valid):
+        if not is_valid:
             return util.to_json(http_status_codes.BAD_REQUEST, error)
     else:
         return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input')
@@ -49,20 +49,15 @@ def change_username():
     else:
         return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input')
     data = request.json
-    if auth_dao.is_logged_in(data['access_token']) == False:
-        return util.to_json(http_status_codes.UNAUTHORIZED, 'Not Authorized')
     status_code = None
-    status_message = None
     return_data = None
     return_value = user_dao.change_username(data)
     if return_value == 1:
         status_code = 200
-        status_message = "success"
-        return_data = None
+        return_data = "success"
     if return_value == -1:
         status_code = 400
-        status_message = data['new_username'] + " is not avaiable. or could't process the request."
-        return_data = None
+        return_data = data['new_username'] + " is not avaiable. or could't process the request."
     current_app.logger.debug("Exit method change_username of user_controller.")
     return util.to_json(status_code, return_data)
 

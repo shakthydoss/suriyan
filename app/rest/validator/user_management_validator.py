@@ -12,6 +12,13 @@ def add_user(data):
         if not data['access_token']:
             error = "access_token cannot be empty."
             is_valid = False
+    if not 'updated_by' in data:
+        error = "Field updated_by is missing."
+        is_valid = False
+    if 'updated_by' in data:
+        if not data['updated_by']:
+            error = "updated_by cannot be empty."
+            is_valid = False
     if not 'username' in data:
         error = "Field username is missing."
         is_valid = False
@@ -29,7 +36,10 @@ def add_user(data):
         if not (data['password'].isalnum()):
             error = "Password should be alpha numeric. No special symbols allowed."
             is_valid = False
-        if len(data['password']) >= 6 and len(data['password']) <= 12:
+        if len(data['password']) < 6:
+            error = "Minimum of 6 and Max of 12 charater is required for password."
+            is_valid = False
+        if len(data['password']) > 12:
             error = "Minimum of 6 and Max of 12 charater is required for password."
             is_valid = False
     current_app.logger.debug("Exit method add_user of user_management_validator.")

@@ -8,10 +8,11 @@
 		"updated_on": "01-01-2016"
 
 	},
-	"status": "published",
+	"status": "draft | open | closed",
 	"is_active":"y",
+    "tags":["bank", "gk"],
 	"data": [{
-		"sno": 1,
+		"qid": 1,
 		"type": "single_choice",
 		"question": "this is question 1",
 		"options": ["india", "japan", "usa"],

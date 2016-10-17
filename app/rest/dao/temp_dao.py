@@ -3,21 +3,21 @@ import rest.dao.mongodb as connection_manager
 import rest.utils.util as util
 
 
-def started(user_id, tpid):
+def started(uid, tpid):
     current_app.logger.debug("Entering method started of user_dao.")
     db, connection = connection_manager.get_connection()
-    fltr = {"tpid": tpid, "user_id": user_id}
+    fltr = {"tpid": tpid, "uid": uid}
     data = {"$set": {"started": "y"}}
     result = db.tp_usr.update_one(fltr, data)
     connection_manager.close_connection(connection)
     current_app.logger.debug("Exit method started of user_dao.")
 
 
-def submit(user_id, tpid):
+def completed(uid, tpid):
     current_app.logger.debug("Entering method submit of user_dao.")
     db, connection = connection_manager.get_connection()
-    fltr = {"tpid": tpid, "user_id": user_id}
-    data = {"$set": {"submited": "y"}}
+    fltr = {"tpid": tpid, "uid": uid}
+    data = {"$set": {"completed": "y"}}
     result = db.tp_usr.update_one(fltr, data)
     connection_manager.close_connection(connection)
     current_app.logger.debug("Entering method exit of user_dao.")

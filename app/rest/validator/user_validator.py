@@ -13,6 +13,13 @@ def change_password(data):
         if not data['access_token']:
             error = "access_token cannot be empty"
             is_valid = False
+    if not 'updated_by' in data:
+        error = "updated_by field is missing"
+        is_valid = False
+    if 'updated_by' in data:
+        if not data['updated_by']:
+            error = "updated_by cannot be empty"
+            is_valid = False
     if not 'uid' in data:
         error = "uid field is missing"
         is_valid = False
@@ -62,6 +69,13 @@ def change_username(data):
     if 'access_token' in data:
         if not data['access_token']:
             error = "access_token cannot be empty"
+            is_valid = False
+    if not 'updated_by' in data:
+        error = "updated_by field is missing"
+        is_valid = False
+    if 'updated_by' in data:
+        if not data['updated_by']:
+            error = "updated_by cannot be empty"
             is_valid = False
     if not 'uid' in data:
         error = "uid field is missing"
