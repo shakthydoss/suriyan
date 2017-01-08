@@ -1,5 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
-import rest.utils.http_status_codes as status_code
+from flask import Blueprint, jsonify
 
 blueprint = Blueprint('search_controller', __name__)
 

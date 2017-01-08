@@ -1,10 +1,9 @@
-from flask import Flask, Blueprint, jsonify, request, current_app, session
+import rest.dao.auth_dao as auth_dao
+import rest.dao.user_dao as user_dao
 import rest.utils.http_status_codes as http_status_codes
 import rest.utils.util as util
 import rest.validator.user_validator as validator
-import rest.dao.user_dao as user_dao
-import rest.dao.auth_dao as auth_dao
-import rest.utils.gobal_variable as gobal_variable
+from flask import Blueprint, request, current_app
 
 blueprint = Blueprint('user_controller', __name__)
 
@@ -91,8 +90,8 @@ def update_my_profile():
     else:
         return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input')
     data = request.json
-    if auth_dao.is_logged_in(data['access_token']) == False:
-        return util.to_json(http_status_codes.UNAUTHORIZED, 'Not Authorized')
+    # if auth_dao.is_logged_in(data['access_token']) == False:
+    #    return util.to_json(http_status_codes.UNAUTHORIZED, 'Not Authorized')
     user_dao.update_my_profile(data)
     return_data = None
     status_code = 200
@@ -105,7 +104,7 @@ def update_my_profile():
 def get_my_profile(uid):
     current_app.logger.debug("Entering method of update_my_profile of user_controller.")
     if not uid:
-        return util.to_json(http_status_codes.BAD_REQUEST, error)
+        return util.to_json(http_status_codes.BAD_REQUEST, 'invalid input')
     return_data = user_dao.get_my_profile(uid)
     status_code = 200
     status_message = "success"

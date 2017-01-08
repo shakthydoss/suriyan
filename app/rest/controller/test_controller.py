@@ -1,11 +1,21 @@
-
-from flask import Flask, Blueprint, jsonify, request, current_app
+import rest.dao.test_dao as test_dao
 import rest.utils.http_status_codes as http_status_codes
 import rest.utils.util as util
 import rest.validator.test_validator as validator
-import rest.dao.test_dao as test_dao
+from flask import Blueprint, request, current_app
 
 blueprint = Blueprint('test_controller', __name__)
+
+
+# get all testpaper assinged for the user
+@blueprint.route('/test/mytestpaper/<uid>/', methods=['GET'])
+def my_testpaper(uid):
+    current_app.logger.debug("Entering method my_testpaper of test_paper_controller.")
+    if not uid:
+        return util.to_json(http_status_codes.BAD_REQUEST, "uid cannot be empty")
+    result = test_dao.my_testpaper(uid)
+    current_app.logger.debug("Exiting method my_testpaper of test_paper_controller.")
+    return util.to_json(http_status_codes.SUCCESS, result)
 
 
 @blueprint.route('/test/started/<tpid>/<uid>/', methods=['GET'])
@@ -57,6 +67,7 @@ def test_completed(tpid, uid):
         return util.to_json(http_status_codes.BAD_REQUEST, "tpid cannot be empty")
     if not uid:
         return util.to_json(http_status_codes.BAD_REQUEST, "uid cannot be empty")
+    test_dao.evaluate_result(tpid, uid)
     test_dao.test_completed(tpid, uid)
     current_app.logger.debug("Exiting method test_started of test_paper_controller.")
     return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
@@ -72,3 +83,25 @@ def evaluate_result(tpid, uid):
     test_dao.evaluate_result(tpid, uid)
     current_app.logger.debug("Exiting method test_started of test_paper_controller.")
     return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
+
+
+@blueprint.route('/test/summary/<tpid>/<uid>/', methods=['GET'])
+def get_summary_test(tpid, uid):
+    current_app.logger.debug("Entering method test_started of test_paper_controller.")
+    if not tpid:
+        return util.to_json(http_status_codes.BAD_REQUEST, "tpid cannot be empty")
+    if not uid:
+        return util.to_json(http_status_codes.BAD_REQUEST, "uid cannot be empty")
+    result = test_dao.get_summary_test(tpid, uid)
+    return util.to_json(http_status_codes.SUCCESS, result)
+
+
+@blueprint.route('/load-test/<tpid>/<uid>/', methods=['GET'])
+def load_test(tpid, uid):
+    current_app.logger.debug("Entering method test_started of test_paper_controller.")
+    if not tpid:
+        return util.to_json(http_status_codes.BAD_REQUEST, "tpid cannot be empty")
+    if not uid:
+        return util.to_json(http_status_codes.BAD_REQUEST, "uid cannot be empty")
+    result = test_dao.get_summary_test(tpid, uid)
+    return util.to_json(http_status_codes.SUCCESS, result)

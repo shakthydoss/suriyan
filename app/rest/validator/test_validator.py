@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
+from flask import current_app
 
 
 def update_response(data):
@@ -40,13 +40,9 @@ def update_response(data):
         if not data['qid']:
             error = "qid cannot be empty"
             is_valid = False
-    if not 'answer' in data:
-        error = "answer field is missing"
+    if not 'response' in data:
+        error = "response field is missing"
         is_valid = False
-    if 'answer' in data:
-        if not data['answer']:
-            error = "answer cannot be empty"
-            is_valid = False
     current_app.logger.debug("Exit method post_tp of user_validator.")
     return is_valid, error
 

@@ -1,4 +1,4 @@
-click==6.6
+ck==6.6
 Flask==0.11
 Flask-Cors==2.1.2
 itsdangerous==0.24

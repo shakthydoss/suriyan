@@ -1,5 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
-import re
+from flask import current_app
 
 
 def save_tag(data):

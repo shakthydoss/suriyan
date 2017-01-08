@@ -6,24 +6,26 @@
   "completed": "n",
   "score": 0,
   "total_marks": 5,
-  "no_of_attempts":1,
-  "no_of_attempts_allowed":"1",
-  "data": [{
-    "qid":"1",
-    "answer":"",
-    "mark_obtained":0,
-    "attempted":"n"
-  },
+  "no_of_attempts": 1,
+  "no_of_attempts_allowed": "1",
+  "data": [
     {
-    "qid":"2",
-    "answer":"",
-    "mark_obtained":0,
-    "attempted":"y"
-  },{
-    "qid":"3",
-    "answer":"",
-    "mark_obtained":1,
-    "attempted":"y"
-  }
+      "qid": "1",
+      "answer": "",
+      "mark_obtained": 0,
+      "attempted": "n"
+    },
+    {
+      "qid": "2",
+      "answer": "",
+      "mark_obtained": 0,
+      "attempted": "y"
+    },
+    {
+      "qid": "3",
+      "answer": "",
+      "mark_obtained": 1,
+      "attempted": "y"
+    }
   ]
 }

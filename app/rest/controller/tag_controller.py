@@ -1,9 +1,8 @@
-from flask import Flask, Blueprint, jsonify, request, current_app, session
+import rest.dao.tag_dao as tag_dao
 import rest.utils.http_status_codes as http_status_codes
 import rest.utils.util as util
 import rest.validator.tag_validator as validator
-import rest.dao.tag_dao as tag_dao
-import rest.utils.gobal_variable as gobal_variable
+from flask import Blueprint, request, current_app
 
 # blueprint object for auth conthtroller
 blueprint = Blueprint('tag_controller', __name__)
@@ -20,6 +19,8 @@ def get_tags():
 @blueprint.route('/tag/id/<tag_id>/', methods=['GET'])
 def get_tag_by_id(tag_id):
     current_app.logger.debug("Entering method get_tag_by_id of tag_controller.")
+    if not tag_id:
+        return util.to_json(http_status_codes.BAD_REQUEST, "tag_id cannot be empty")
     return_data = tag_dao.get_tag_by_id(tag_id)
     current_app.logger.debug("Exit method get_tag_by_id of tag_controller.")
     return util.to_json(http_status_codes.SUCCESS, return_data)

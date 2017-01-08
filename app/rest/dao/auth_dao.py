@@ -1,10 +1,8 @@
-from flask import current_app
-import rest.dao.mysqldb as connection_manager
-import rest.dao.mongodb as connection_manager_mongo
-import rest.utils.util as util
-import rest.utils.gobal_variable as gobal_variable
-import requests
 import json
+
+import requests
+import rest.dao.mongodb as connection_manager_mongo
+from flask import current_app
 
 
 def authenticate(data):

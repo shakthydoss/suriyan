@@ -1,9 +1,10 @@
-from flask import Flask, Blueprint, jsonify, request, current_app, session
+import json
+
+import rest.dao.auth_dao as auth_dao
 import rest.utils.http_status_codes as http_status_codes
 import rest.utils.util as util
 import rest.validator.auth_validator as validator
-import rest.dao.auth_dao as auth_dao
-import json
+from flask import Blueprint, request
 
 blueprint = Blueprint('auth_controller', __name__)
 

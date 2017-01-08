@@ -1,6 +1,5 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
-import rest.utils.http_status_codes as status_code
 import rest.utils.util as util
+from flask import Blueprint, request, current_app
 
 # blueprint object for home controller
 blueprint = Blueprint('error_handler', __name__)

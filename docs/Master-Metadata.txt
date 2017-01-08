@@ -1,14 +1,14 @@
 Test paper - status
 -------------------
 draft
-open
+open (published)
 close
 
 Test paper questions types
 --------------------------
-Single choice
-Multiple choice
-True or false
-Fill in the blanks
-Match the followings
-Free text
+1   Single Choice   (single_choice)
+2	Multi choice    (multi_choice)
+3	Fill up         (fill_up)
+4	Match           (match)
+5 	True or False   (true_or_false)
+6	Text            (text)

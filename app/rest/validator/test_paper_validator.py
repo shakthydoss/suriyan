@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
+from flask import current_app
 
 
 def post_tp(data):
@@ -61,11 +61,11 @@ def validate_question_type(ques):
         is_valid, error = validate_single_choice(ques)
         if not (is_valid):
             return is_valid, error
-    if ques['type'] == 'multiple_choice':
+    if ques['type'] == 'multi_choice':
         is_valid, error = validate_multiple_choice(ques)
         if not (is_valid):
             return is_valid, error
-    if ques['type'] == 'fill_in_blanks':
+    if ques['type'] == 'fill_up':
         is_valid, error = validate_fill_in_blank(ques)
         if not (is_valid):
             return is_valid, error
@@ -90,13 +90,19 @@ def validate_single_choice(ques):
         if not (len(ques['options']) > 1):
             error = "options cannot be empty."
             is_valid = False
-    if not 'answer' in ques:
-        error = "Field answer is missing."
+    if not 'answers' in ques:
+        error = "Field answers is missing."
         is_valid = False
-    if 'answer' in ques:
-        if not len(ques['answer']) == 1:
-            error = "answer cannot be empty and should be single choice value"
+    if 'answers' in ques:
+        print(len(ques['answers']))
+        if len(ques['answers']) != 1:
+            error = "answers cannot be empty and should be single choice value"
             is_valid = False
+    if 'options' in ques and 'answers' in ques:
+        for ans in ques['answers']:
+            if ans not in ques['options']:
+                error = "answers do not match with options specified."
+                is_valid = False
     return is_valid, error
 
 
@@ -110,25 +116,37 @@ def validate_multiple_choice(ques):
         if not (len(ques['options']) > 1):
             error = "options cannot be empty."
             is_valid = False
-    if not 'answer' in ques:
-        error = "Field answer is missing."
+    if not 'answers' in ques:
+        error = "Field answers is missing."
         is_valid = False
-    if 'answer' in ques:
-        if not len(ques['answer']) > 1:
-            error = "answer cannot be empty and should be multiple choice."
+    if 'answers' in ques:
+        if not len(ques['answers']) > 1:
+            error = "answers cannot be empty and should be multiple choice."
             is_valid = False
+    if 'options' in ques and 'answers' in ques:
+        if not len(ques['answers']) <= len(ques['options']):
+            error = "Invalid answers"
+            is_valid = False
+    if 'options' in ques and 'answers' in ques:
+        for ans in ques['answers']:
+            if ans not in ques['options']:
+                error = "answers do not match with options specified."
+                is_valid = False
     return is_valid, error
 
 
 def validate_fill_in_blank(ques):
     error = None
     is_valid = True
-    if not ('answer' in ques):
-        error = "Field answer is missing"
+    if not ('answers' in ques):
+        error = "Field answers is missing"
         is_valid = False
-    if 'answer' in ques:
-        if not (len(ques['answer']) >= 1):
-            error = "Invalid answer or not all blank has be filled"
+    if 'answers' in ques:
+        total_mark_for_this_question = int(ques["total_mark_for_this_question"])
+        mark_per_correct_answer = int(ques["mark_per_correct_answer"])
+        no_of_fill_up = int(total_mark_for_this_question / mark_per_correct_answer)
+        if not (len(ques['answers']) != no_of_fill_up):
+            error = "Invalid answers or not all blank has be filled"
             is_valid = False
     return is_valid, error
 
@@ -154,12 +172,12 @@ def validate_match(ques):
         if not len(ques["right"]) == len(ques["left"]):
             error = "right and left length side should be equal."
             is_valid = False
-    if not 'answer' in ques:
-        error = "Field answer is missing."
+    if not 'answers' in ques:
+        error = "Field answers is missing."
         is_valid = False
-    if 'answer' in ques:
-        if not (len(ques['answer']) == len(ques["right"])):
-            error = "answer length is not matching L.H.S or R.H.S"
+    if 'answers' in ques:
+        if not (len(ques['answers']) == len(ques["right"])):
+            error = "answers length is not matching L.H.S or R.H.S"
             is_valid = False
     return is_valid, error
 
@@ -167,12 +185,12 @@ def validate_match(ques):
 def validate_true_or_false(ques):
     error = None
     is_valid = True
-    if 'answer' not in ques:
-        error = "Field answer is missing."
+    if 'answers' not in ques:
+        error = "Field answers is missing."
         is_valid = False
-    if 'answer' in ques:
-        if not ques['answer']:
-            error = "answer cannot be empty."
+    if 'answers' in ques:
+        if not ques['answers']:
+            error = "answers cannot be empty."
             is_valid = False
     return is_valid, error
 
@@ -201,6 +219,54 @@ def create_tp(data):
         if not data['name']:
             error = "name cannot be empty."
             is_valid = False
+    if 'time_limit' not in data:
+        error = "Field time_limit is missing."
+        is_valid = False
+    if 'time_limit' in data:
+        if not data['time_limit']:
+            error = "time_limit cannot be empty."
+            is_valid = False
+    return is_valid, error
+
+
+def save_or_update(data):
+    error = None
+    is_valid = True
+    if 'access_token' not in data:
+        error = "Field access_token is missing."
+        is_valid = False
+    if 'access_token' in data:
+        if not data['access_token']:
+            error = "access_token cannot be empty."
+            is_valid = False
+    if 'updated_by' not in data:
+        error = "Field updated_by is missing."
+        is_valid = False
+    if 'updated_by' in data:
+        if not data['updated_by']:
+            error = "updated_by cannot be empty."
+            is_valid = False
+    if 'name' not in data:
+        error = "Field name is missing."
+        is_valid = False
+    if 'name' in data:
+        if not data['name']:
+            error = "name cannot be empty."
+            is_valid = False
+    if 'time_limit' not in data:
+        error = "Field time_limit is missing."
+        is_valid = False
+    if 'time_limit' in data:
+        if not data['time_limit']:
+            error = "time_limit cannot be empty."
+            is_valid = False
+    if 'status' not in data:
+        error = "Field status is missing."
+        is_valid = False
+    if 'status' in data:
+        if not data['status']:
+            error = "status cannot be empty."
+            is_valid = False
     return is_valid, error
 
 
@@ -216,10 +282,36 @@ def add_question_to_tp(data):
 
 def remove_question_from_tp(data):
     current_app.logger.debug("Entering method remove_question_from_tp of test_paper_validator.")
-    is_valid, error = check_common_fields_in_question(data)
-    if not (is_valid):
-        return is_valid, error
-    is_valid, error = validate_question_type(data)
+    error = None
+    is_valid = True
+    if 'access_token' not in data:
+        error = "Field access_token is missing."
+        is_valid = False
+    if 'access_token' in data:
+        if not data['access_token']:
+            error = "access_token cannot be empty."
+            is_valid = False
+    if 'updated_by' not in data:
+        error = "Field updated_by is missing."
+        is_valid = False
+    if 'updated_by' in data:
+        if not data['updated_by']:
+            error = "updated_by cannot be empty."
+            is_valid = False
+    if 'tpid' not in data:
+        error = "Field tpid is missing."
+        is_valid = False
+    if 'tpid' in data:
+        if not data['tpid']:
+            error = "tpid cannot be empty."
+            is_valid = False
+    if 'qid' not in data:
+        error = "Field qid is missing."
+        is_valid = False
+    if 'qid' in data:
+        if not data['qid']:
+            error = "qid cannot be empty."
+            is_valid = False
     current_app.logger.debug("Exiting method remove_question_from_tp of test_paper_validator.")
     return is_valid, error
 
@@ -336,6 +428,7 @@ def update_tags(data):
     current_app.logger.debug("Exiting method check_common_fields_in_question of test_paper_validator.")
     return is_valid, error
 
+
 def update_status(data):
     current_app.logger.debug("Entering method update_status of test_paper_validator.")
     error = None
@@ -369,4 +462,33 @@ def update_status(data):
             error = "status cannot be empty."
             is_valid = False
     current_app.logger.debug("Exiting method update_status of test_paper_validator.")
+    return is_valid, error
+
+
+def invite_user_for_test(data):
+    current_app.logger.debug("Entering method invite_user_for_test of test_paper_validator.")
+    error = None
+    is_valid = True
+    if 'tpid' not in data:
+        error = "Field tpid is missing."
+        is_valid = False
+    if 'tpid' in data:
+        if not data['tpid']:
+            error = "tpid cannot be empty."
+            is_valid = False
+    if not 'uids' in data:
+        error = "Field uids is missing."
+        is_valid = False
+    if 'uids' in data:
+        if (len(data['uids']) < 1):
+            error = "uids cannot be empty."
+            is_valid = False
+    if not 'invited_by' in data:
+        error = "Field invited_by is missing."
+        is_valid = False
+    if 'invited_by' in data:
+        if (len(data['invited_by']) < 1):
+            error = "invited_by cannot be empty."
+            is_valid = False
+    current_app.logger.debug("Exiting method invite_user_for_test of test_paper_validator.")
     return is_valid, error

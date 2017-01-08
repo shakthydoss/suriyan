@@ -1,5 +1,4 @@
 import MySQLdb
-import time
 
 
 def get_connection():

@@ -1,10 +1,9 @@
-from flask import current_app
+import json
+
+import requests
 import rest.dao.mongodb as connection_manager_mongo
 import rest.dao.mysqldb as connection_manager_mysql
-import rest.utils.util as util
-from bson.objectid import ObjectId
-import requests
-import json
+from flask import current_app
 
 
 def change_password(data):
@@ -30,6 +29,7 @@ def change_username(data):
             cursor.execute(sql, values)
             db.commit()
             return_value = 1
+            # TODO update username in mongodb
         except Exception, e:
             current_app.logger.error("Exception : %s", str(e))
             db.rollback()
@@ -68,7 +68,17 @@ def update_my_profile(data):
     db, connection = connection_manager_mongo.get_connection()
     key = {'uid': data['uid']}
     del data['access_token']
-    result = db.usr.update(key, data, upsert=True)
+    del data["uid"]
+    if data:
+        val = {
+            "$set": {
+                "full_name": data["full_name"] if "full_name" in data else "",
+                "email": data["email"] if "email" in data else "",
+                "mobile": data["mobile"] if "mobile" in data else ""
+            }
+        }
+        print json.dumps(val)
+        result = db.usr.update(key, val, upsert=True)
     connection_manager_mongo.close_connection(connection)
     current_app.logger.debug("Exit method update_my_profile of user_dao")
 
@@ -82,4 +92,3 @@ def get_my_profile(uid):
     connection_manager_mongo.close_connection(connection)
     current_app.logger.debug("Exit method get_my_profile of user_dao")
     return result
-

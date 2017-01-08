@@ -1,94 +1,102 @@
 {
-	"id": "tp1234",
-	"name": "Test Paper 1",
-	"audit": {
-		"created_by": "1234",
-		"created_on": "01-01-2016",
-		"updated_by": "1234",
-		"updated_on": "01-01-2016"
-
-	},
-	"status": "draft | open | closed",
-	"is_active":"y",
-    "tags":["bank", "gk"],
-	"data": [{
-		"qid": 1,
-		"type": "single_choice",
-		"question": "this is question 1",
-		"options": ["india", "japan", "usa"],
-		"answer": "india",
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
-	}, {
-		"sno": 2,
-		"type": "multiple_choice",
-		"question": "this is question 2",
-		"options": ["india", "japan", "usa", "russia"],
-		"answer": ["russia",
-			"usa"
-		],
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
-	}, {
-		"sno": 3,
-		"type": "fill_in_blanks",
-		"question": "this question contains blanks like ..... and ....",
-		"answer": {
-			"1": "first blank answer",
-			"2": "second blank answer"
-		},
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":2
-	}, {
-		"sno": 4,
-		"type": "true_or_false",
-		"question": "Delhi is capital of India",
-		"answer": "true",
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
-	}, {
-		"sno": 5,
-		"type": "match",
-		"match": {
-			"left": {
-				"1": "India",
-				"2": "USA",
-				"3": "Pakistan"
-			},
-			"right": {
-				"1": "Hindu",
-				"2": "Chirstian",
-				"3": "Muslium"
-			}
-		},
-		"answer": ["1-2", "2-3", "3-1"],
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
-	}, {
-		"sno": 6,
-		"type": "text",
-		"question": "who is gandhi",
-		"keyword": ["1989", "india", "father-of-nation"],
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
-	}, {
-		"sno": 7,
-		"type": "multiple_choice_img",
-		"is_q_img": "n",
-		"is_q_img": "y",
-		"question": "who is gandhi in the following images",
-		"option": ["img1", "img2", "img3", "img4"],
-		"answer": ["img2",
-			"img4"
-		],
-		"mark_per_correct_answer": 1,
-		"mark_per_wrong_answer":0,
-		"total_mark_for_this_question":1
-	}]
+  "tpid": "1234567890",
+  "name": "English Test paper I 2016 Nov",
+  "total_marks": "10",
+  "time": "30",
+  "instruction": "This Question paper contain section A, B, and C. All sections are necessary. There is no negative mark for wrong answers",
+  "tag": [
+    "subject-code",
+    "semester1",
+    "modalexams"
+  ],
+  "status": "published",
+  "audit": {
+    "created_by": "1234567890",
+    "created_on": "1234567890",
+    "updated_by": "1234567890",
+    "updated_on": "1234567890"
+  },
+  "questions": {
+    "1": {
+      "qid": "1",
+      "type": "single_choice",
+      "total_mark_for_this_question": "1",
+      "mark_per_correct_answer": "1",
+      "mark_per_wrong_answer": "0",
+      "group": "Section A",
+      "question": "English east india company form in year.",
+      "options": [
+        "1600",
+        "1664",
+        "1644",
+        "1700"
+      ],
+      "answers": [
+        "1600"
+      ]
+    },
+    "2": {
+      "qid": "2",
+      "type": "multi_choice",
+      "total_mark_for_this_question": "2",
+      "mark_per_correct_answer": "1",
+      "mark_per_wrong_answer": "0",
+      "group": "Section A",
+      "question": "English east india company form in year.",
+      "options": [
+        "1600",
+        "1664",
+        "1644",
+        "1700"
+      ],
+      "answers": [
+        "1600",
+        "1664"
+      ]
+    },
+    "3": {
+      "qid": "3",
+      "type": "fill_up",
+      "total_mark_for_this_question": "2",
+      "mark_per_correct_answer": "1",
+      "mark_per_wrong_answer": "0",
+      "group": "Section A",
+      "question": "English east india company form in year {{1}} and {{2}}",
+      "answers": [
+        "1-1600",
+        "2-1664"
+      ]
+    },
+    "4": {
+      "qid": "4",
+      "type": "match",
+      "total_mark_for_this_question": "3",
+      "mark_per_correct_answer": "1",
+      "mark_per_wrong_answer": "0",
+      "group": "Section A",
+      "question": "Match the Following",
+      "options": [
+        "Apple-Yellow",
+        "Mango-Green",
+        "Goa-Red"
+      ],
+      "answers": [
+        "Apple-Red",
+        "Mango-Yellow",
+        "Goa-Green"
+      ]
+    },
+    "5": {
+      "qid": "5",
+      "type": "true_or_false",
+      "total_mark_for_this_question": "1",
+      "mark_per_correct_answer": "1",
+      "mark_per_wrong_answer": "0",
+      "group": "Section A",
+      "question": "East India Company was eastablished in 1988",
+      "answers": [
+        "False"
+      ]
+    }
+  }
 }

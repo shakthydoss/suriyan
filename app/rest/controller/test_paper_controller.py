@@ -1,8 +1,8 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
+import rest.dao.test_paper_dao as test_paper_dao
 import rest.utils.http_status_codes as http_status_codes
 import rest.utils.util as util
 import rest.validator.test_paper_validator as validator
-import rest.dao.test_paper_dao as test_paper_dao
+from flask import Blueprint, jsonify, request, current_app
 
 # blueprint object for home controller
 blueprint = Blueprint('test_paper_controller', __name__)
@@ -66,9 +66,8 @@ def create_tp():
     tpid = test_paper_dao.create_tp(data)
     tmp = dict()
     tmp["tpid"] = str(tpid)
-    status_code = 200
     current_app.logger.debug("Exiting method create_tp of test_paper_controller.")
-    return util.to_json(status_code, tmp)
+    return util.to_json(http_status_codes.SUCCESS, tmp)
 
 
 @blueprint.route('/tp/addQuestion/', methods=['POST'])
@@ -88,7 +87,7 @@ def add_question_to_tp():
 
 @blueprint.route('/tp/updateQuestion/', methods=['POST'])
 def update_question_to_tp():
-    current_app.logger.debug("Entering method add_question_to_tp of test_paper_controller.")
+    current_app.logger.debug("Entering method updateQuestion of test_paper_controller.")
     if hasattr(request, 'json'):
         data = request.json
         is_valid, error = validator.update_question_to_tp(data)
@@ -97,7 +96,7 @@ def update_question_to_tp():
     else:
         return util.to_json(http_status_codes.BAD_REQUEST, http_status_codes.MESSAGE_INVALID_INPUTS)
     test_paper_dao.update_question_to_tp(data)
-    current_app.logger.debug("Exiting method add_question_to_tp of test_paper_controller.")
+    current_app.logger.debug("Exiting method updateQuestion of test_paper_controller.")
     return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
 
 
@@ -116,6 +115,7 @@ def remove_question_from_tp():
     return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
 
 
+# TODO remove this
 @blueprint.route('/tp/updateTag/', methods=['POST'])
 def update_tags():
     current_app.logger.debug("Entering method update_tags of test_paper_controller.")
@@ -131,6 +131,7 @@ def update_tags():
     return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
 
 
+# TODO remove this
 @blueprint.route('/tp/updateStatus/', methods=['POST'])
 def update_status():
     current_app.logger.debug("Entering method update_tags of test_paper_controller.")
@@ -145,21 +146,47 @@ def update_status():
     current_app.logger.debug("Exiting method update_tags of test_paper_controller.")
     return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
 
-@blueprint.route('/tp/inviteUserForTest/<tpid>/<uid>/', methods=['GET'])
-def invite_user_for_test(tpid, uid):
+
+@blueprint.route('/tp/inviteUserForTest/', methods=['POST'])
+def invite_user_for_test():
     current_app.logger.debug("Entering method invite_user_for_test of test_paper_controller.")
+    if hasattr(request, 'json'):
+        data = request.json
+        is_valid, error = validator.invite_user_for_test(data)
+        if not is_valid:
+            return util.to_json(http_status_codes.BAD_REQUEST, error)
+    else:
+        return util.to_json(http_status_codes.BAD_REQUEST, http_status_codes.MESSAGE_INVALID_INPUTS)
+    data = request.json
+    for uid in data["uids"]:
+        test_paper_dao.invite_user_for_test(data["tpid"], uid, data["invited_by"])
+    current_app.logger.debug("Exit method post_tp of test_paper_controller.")
+    return util.to_json(http_status_codes.SUCCESSFULLY_CREATED, "Invited successfully")
+
+
+@blueprint.route('/tp/save-or-update/', methods=['POST'])
+def save_or_update():
+    current_app.logger.debug("Entering method save_or_update of test_paper_controller.")
+    if hasattr(request, 'json'):
+        data = request.json
+        is_valid, error = validator.save_or_update(data)
+        if not is_valid:
+            return util.to_json(http_status_codes.BAD_REQUEST, error)
+    else:
+        return util.to_json(http_status_codes.BAD_REQUEST, http_status_codes.MESSAGE_INVALID_INPUTS)
+    if data["status"] == "published":
+        if not data['questions']:
+            return util.to_json(http_status_codes.BAD_REQUEST, "Questions cannot be empty.")
+    test_paper_dao.save_or_update(data)
+    current_app.logger.debug("Exiting method save_or_update of test_paper_controller.")
+    return util.to_json(http_status_codes.SUCCESS, http_status_codes.MESSAGE_SUCCESS)
+
+
+@blueprint.route('/tp/view-report/<tpid>/', methods=['GET'])
+def view_report(tpid):
+    current_app.logger.debug("Entering method view_report of test_paper_controller.")
     if not tpid:
         return util.to_json(http_status_codes.BAD_REQUEST, "tpid cannot be empty")
-    if not uid:
-        return util.to_json(http_status_codes.BAD_REQUEST, "uid cannot be empty")
-    test_paper_dao.invite_user_for_test(tpid, uid)
-    current_app.logger.debug("Exit method post_tp of test_paper_controller.")
-    return util.to_json(http_status_codes.SUCCESSFULLY_CREATED, None)
-
-# create_tp(name, created_by)
-# add_question_to_tp(tpip, question)
-# update_question_to_tp(tpip,question)
-# remove_question_from_tp(tpip,question)
-# delete_tp(tpid)
-# update_status(tpid, status)
-# update_tags(tpid, tags)
+    result = test_paper_dao.view_report(tpid)
+    current_app.logger.debug("Entering method view_report of test_paper_controller.")
+    return util.to_json(http_status_codes.SUCCESS, result)

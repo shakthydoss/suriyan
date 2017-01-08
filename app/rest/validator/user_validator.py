@@ -1,5 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request, current_app
-import re
+from flask import current_app
 
 
 def change_password(data):
@@ -70,13 +69,6 @@ def change_username(data):
         if not data['access_token']:
             error = "access_token cannot be empty"
             is_valid = False
-    if not 'updated_by' in data:
-        error = "updated_by field is missing"
-        is_valid = False
-    if 'updated_by' in data:
-        if not data['updated_by']:
-            error = "updated_by cannot be empty"
-            is_valid = False
     if not 'uid' in data:
         error = "uid field is missing"
         is_valid = False
@@ -109,29 +101,5 @@ def update_my_profile(data):
     if not 'uid' in data:
         error = "uid field is missing"
         is_valid = False
-    if not 'full_name' in data:
-        error = "full name field is missing"
-        is_valid = False
-    if 'full_name' in data:
-        if not data['full_name']:
-            error = "full name field cannot be empty"
-            is_valid = False
-    if not 'email' in data:
-        error = "email field is missing"
-        is_valid = False
-    if 'email' in data:
-        if not data['email']:
-            error = "email field cannot be empty"
-            is_valid = False
-    if not 'mobile' in data:
-        error = "email field is missing"
-        is_valid = False
-    if 'mobile' in data:
-        if not data['mobile']:
-            error = "mobile field cannot be empty."
-            is_valid = False
-        if not data['mobile'].isdigit():
-            error = "Not a valid mobile number."
-            is_valid = False
     current_app.logger.debug("Exit method of update_my_profile of user_validator.")
     return is_valid, error
